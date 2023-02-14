@@ -51,8 +51,8 @@ namespace PMO_repo
             dataModel.Password = dataView.Password;
             dataModel.Createdby = IdUser;
             dataModel.Createddate = DateTime.Now;
-            dataModel.Updatedby = IdUser;
-            dataModel.Updateddate = DateTime.Now;
+            //dataModel.Updatedby = IdUser;
+            //dataModel.Updateddate = DateTime.Now;
             dataModel.Deleted = false;
             try
             {
