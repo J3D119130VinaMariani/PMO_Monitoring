@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en" id="Layout">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - xpos302.web</title>
+
+    <script src="~/adminmart/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/adminmart/assets/images/favicon.png">
+    <title>Adminmart Template - The Ultimate Multipurpose admin template</title>
+    <!-- Custom CSS -->
+    <link href="~/adminmart/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
+    <link href="~/adminmart/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="~/adminmart/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="~/adminmart/dist/css/style.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+
+        <partial name="_Header" />
+
+        @Html.Partial("_Header")
+        @Html.Partial("_Sidebar")
+
+        <div class="page-wrapper">
+            >
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+            <footer class="footer text-center text-muted">
+                All Rights Reserved by Adminmart. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
+            </footer>
+        </div>
+
+
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">
+                        ×
+                    </button>
+                </div>
+                <div class="modal-body" id="body_modal">
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    <script src="~/adminmart/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="~/adminmart/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- apps -->
+    <!-- apps -->
+    <script src="~/adminmart/dist/js/app-style-switcher.js"></script>
+    <script src="~/adminmart/dist/js/feather.min.js"></script>
+    <script src="~/adminmart/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/adminmart/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/adminmart/dist/js/custom.min.js"></script>
+    <!--This page JavaScript -->
+    <script src="~/adminmart/assets/extra-libs/c3/d3.min.js"></script>
+    <script src="~/adminmart/assets/extra-libs/c3/c3.min.js"></script>
+    <script src="~/adminmart/assets/libs/chartist/dist/chartist.min.js"></script>
+    <script src="~/adminmart/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="~/adminmart/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="~/adminmart/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/adminmart/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    <style>
+        .btn_edit, .btn_delete, .btn_detail, #btn_search, #btn_reset {
+            cursor: pointer
+        }
+    </style>
+</body>
+</html>

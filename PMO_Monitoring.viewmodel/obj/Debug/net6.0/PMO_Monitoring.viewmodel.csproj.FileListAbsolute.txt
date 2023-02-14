@@ -1,0 +1,15 @@
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\bin\Debug\net6.0\PMO_Monitoring.viewmodel.exe
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\bin\Debug\net6.0\PMO_Monitoring.viewmodel.deps.json
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\bin\Debug\net6.0\PMO_Monitoring.viewmodel.runtimeconfig.json
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\bin\Debug\net6.0\PMO_Monitoring.viewmodel.dll
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\bin\Debug\net6.0\PMO_Monitoring.viewmodel.pdb
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\obj\Debug\net6.0\PMO_Monitoring.viewmodel.csproj.AssemblyReference.cache
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\obj\Debug\net6.0\PMO_Monitoring.viewmodel.GeneratedMSBuildEditorConfig.editorconfig
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\obj\Debug\net6.0\PMO_Monitoring.viewmodel.AssemblyInfoInputs.cache
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\obj\Debug\net6.0\PMO_Monitoring.viewmodel.AssemblyInfo.cs
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\obj\Debug\net6.0\PMO_Monitoring.viewmodel.csproj.CoreCompileInputs.cache
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\obj\Debug\net6.0\PMO_Monitoring.viewmodel.dll
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\obj\Debug\net6.0\refint\PMO_Monitoring.viewmodel.dll
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\obj\Debug\net6.0\PMO_Monitoring.viewmodel.pdb
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\obj\Debug\net6.0\PMO_Monitoring.viewmodel.genruntimeconfig.cache
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.viewmodel\obj\Debug\net6.0\ref\PMO_Monitoring.viewmodel.dll

@@ -1,0 +1,155 @@
+﻿@using PMO_viewmodel
+@model VMMstUser
+
+@{
+    Layout = null;
+}
+<form class="mt-4" id="create">
+   
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3 row">
+                <label for="Nama" class="col-sm-4 col-from-label">Nama</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Nama" name="Nama"></input>
+                    <span asp-validation-for="Nama" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="mb-3 row">
+                <label for="Divisi" class="col-sm-4 col-from-label">Divisi</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="Divisi" name="Divisi"></input>
+                    <span asp-validation-for="Divisi" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3 row">
+                <label for="Username" class="col-sm-4 col-from-label">Username</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Username" name="Username"></input>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="mb-3 row">
+                <label for="Password" class="col-sm-4 col-from-label">Password</label>
+                <div class="col-sm-8">
+                    <input type="password" class="form-control" id="Password" name="Password"></input>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="Password2" class="col-sm-4 col-from-label">Re-Password</label>
+                <div class="col-sm-8">
+                    <input type="password" class="form-control" id="Password2" name="Password2"></input>
+                    <span asp-validation-for="Password2" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="float-right">
+        <a asp-action="Index" class="btn btn-light">Batal</a>
+        <button type="submit" class="btn btn-primary" id="tambah">Simpan</button>
+    </div>
+</form>
+
+<script>
+
+    $(document).ready(function () {
+        var isvalid = true
+        $("#create").validate({
+            errorClass: "text-danger",
+            rules: {
+                Nama: {
+                    required: true,
+                    minlength: 2
+                },
+                Divisi: {
+                    required: true,
+                },
+                Username: {
+                    required: true,
+                    minlength: 2
+                },
+                Password: {
+                    required: true,
+                    strong_password: true
+                },
+                Password2: {
+                    required: true,
+                    equalTo: "#Password"
+                }
+            },
+            messages: {
+                Nama: {
+                    required: "Please fill the Name",
+                    minlength: "Name must consist at least 2 character"
+                },
+                Divisi: {
+                    required: "Please fill the Division",
+                },
+                Username: {
+                    required: "Please fill the Username",
+                    minlength: "Name must consist at least 2 character"
+                },
+                PassWord: "Please fill the Password",
+                Password2: {
+                    required: "Please fill the Password",
+                    equalTo: "Password not match"
+                }
+            },
+            submitHandler: function (form) {
+                debugger
+                var data = $("#create").serialize()
+                if (isvalid) {
+                    $.ajax({
+                        url: "/MstUser/Create",
+                        data: data,
+                        type: 'post',
+                        dataType: "json",
+                        success: function (respon) {
+                            debugger
+                            if (respon) {
+                                alert(respon.message)
+                                window.location.reload()
+                            }
+                        }
+                    })
+                }
+                else {
+                    alert("Data tidak Berhasil Disimpan")
+                }
+            }
+        })
+
+        $.validator.addMethod("strong_password", function (value, element) {
+            let password = value;
+            if (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@@#$%&])(.{8,20}$)/.test(password))) {
+                return false;
+            }
+            return true;
+        }, function (value, element) {
+            let password = $(element).val();
+            if (!(/^(.{8,20}$)/.test(password))) {
+                return 'Password must be between 8 to 20 characters long.';
+            }
+            else if (!(/^(?=.*[A-Z])/.test(password))) {
+                return 'Password must contain at least one uppercase.';
+            }
+            else if (!(/^(?=.*[a-z])/.test(password))) {
+                return 'Password must contain at least one lowercase.';
+            }
+            else if (!(/^(?=.*[0-9])/.test(password))) {
+                return 'Password must contain at least one digit.';
+            }
+            else if (!(/^(?=.*[@@#$%&])/.test(password))) {
+                return "Password must contain special characters from @@#$%&.";
+            }
+            return false;
+        });
+
+    })
+
+</script>
