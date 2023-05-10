@@ -1,0 +1,151 @@
+﻿@using PMO_Monitoring.viewmodel
+@using PMO_Monitoring.Services
+@model PaginatedList<VMMstStatus>
+
+
+<form asp-action="Index" method="get" id="form_search">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Master Status</h4>
+                    <div class="col-12">
+                        <div class="custimize-input float-right">
+                            <div class="input-group">
+                                <input type="text" id="SearchString" name="SearchString" value="@ViewBag.Search" class="form-control form-control-sm" placeholder="Search" />
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text" id="btn_search">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div class="input-group-text" id="btn_reset">
+                                        <i class="fas fa-redo"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <button type="button" class="btn btn-primary" id="btnCreate">Create</button>
+
+                    <p        </p>
+                    <table class="table table-hover"
+            <thead>
+                <tr>
+                    <th> Code</th>
+                    <th> Keterangan</th>
+                    <th> Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                            @{
+                                foreach (VMMstStatus data in Model)
+                                {
+                                      <tr>
+                                           <td>@data.Code</td>
+                                           <td>@data.Keterangan</td>
+                                           <td>
+                                                    <a class="btn btn-primary btn_edit" style="color:white" data-id="@data.Id">Edit</a>
+                                                    <a class="btn btn-primary btn_delete" style="color:white" data-id="@data.Id">Delete</a>
+                                                    <a class="btn btn-primary btn_detail " style="color:white" data-id="@data.Id">Detail</a>
+
+                                            
+                                           </td>
+                                       </tr>
+                                }
+                            }
+            </tbody>
+            </table>
+                    <center>
+                        @{
+                            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                            var prev = "<<";
+
+                        }
+                        @{
+                            if (prevDisabled == "disabled")
+                            {
+                                <a asp-action="Index"
+                           asp-route-pageNumber="@(Model.PageIndex - 1)"
+                           asp-route-currentFilter="@ViewBag.Search"
+                           class="btn btn-outline-primary @prevDisabled">
+                                    @prev
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-action="Index"
+                           asp-route-pageNumber="@(Model.PageIndex - 1)"
+                           asp-route-currentFilter="@ViewBag.Search"
+                           class="btn btn-primary @prevDisabled">
+                                    @prev
+                                </a>
+                            }
+                        }
+
+                        <a>
+                            Page @Model.PageIndex
+                        </a>
+                        @{
+                            if (nextDisabled == "disabled")
+                            {
+                                <a asp-action="Index"
+                           asp-route-pageNumber="@(Model.PageIndex + 1)"
+                           asp-route-currentFilter="@ViewBag.Search"
+                           class="btn btn-outline-primary @nextDisabled">
+                                    >>
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-action="Index"
+                           asp-route-pageNumber="@(Model.PageIndex + 1)"
+                           asp-route-currentFilter="@ViewBag.Search"
+                           class="btn btn-primary @nextDisabled">
+                                    >>
+                                </a>
+                            }
+                        }
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $("#btnCreate").click(function () {
+            $("#myModalLabel").empty()
+            $("#myModalLabel").text("Create")
+            $("#body_modal").load("/MstStatus/Create")
+            $("#myModal").modal("show")
+        })
+        $(".btn_edit").click(function () {
+            var id = $(this).data("id")
+            $("#myModalLabel").text("Edit")
+            $("#body_modal").load("MstStatus/Edit?id=" + id)
+            $("#myModal").modal("show")
+        })
+        $(".btn_delete").click(function () {
+            var id = $(this).data("id")
+            $("#myModalLabel").text("Delete")
+            $("#body_modal").load("MstStatus/Delete?id=" + id)
+            $("#myModal").modal("show")
+        })
+        $(".btn_detail").click(function () {
+            var id = $(this).data("id")
+            $("#myModalLabel").text("Detail")
+            $("#body_modal").load("MstStatus/Detail?id=" + id)
+            $("#myModal").modal("show")
+        })
+        $("#btn_search").click(function () {
+            $("#form_search").submit()
+        })
+        $("#btn_reset").click(function () {
+            $("#form_search").empty()
+            $("#form_search").submit()
+        })
+    })
+
+</script>

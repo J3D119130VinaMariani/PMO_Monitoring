@@ -1,4 +1,4 @@
-﻿@using PMO_viewmodel
+﻿@using PMO_Monitoring.viewmodel
 @model VMMstUser
 
 @{
@@ -20,13 +20,42 @@
                     <input type="text" class="form-control" id="Nama" name="Nama" value="@Model.Nama"></input>
                     <span asp-validation-for="Nama" class="text-danger"></span>
                 </div>
-
+            </div>
+            <div class="mb-3 row">
+                <label for="Email" class="col-sm-4 col-from-label">Email</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Email" name="Email" value="@Model.Email"></input>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
             </div>
             <div class="mb-3 row">
                 <label for="Divisi" class="col-sm-4 col-from-label">Divisi</label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control" id="Divisi" name="Divisi" value="@Model.Divisi"></input>
+                    @Html.DropDownListFor(x=>x.Divisi,
+                    new SelectList(ViewBag.DropDownDivisi,"Id","Name"),
+                    "--Select Divisi--",
+                    new{@class="form-control"})
                     <span asp-validation-for="Divisi" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="Role" class="col-sm-4 col-from-label">Role</label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(x=>x.Role,
+                    new SelectList(ViewBag.DropDownRole,"Id","Name"),
+                    "--Select Role--",
+                    new{@class="form-control"})
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="Jabatan" class="col-sm-4 col-from-label">Jabatan</label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(x=>x.Jabatan,
+                    new SelectList(ViewBag.DropDownJabatan,"Id","Nama"),
+                    "--Select Jabatan--",
+                    new{@class="form-control"})
+                    <span asp-validation-for="Jabatan" class="text-danger"></span>
                 </div>
             </div>
         </div>
@@ -72,7 +101,14 @@
                     required: true,
                     minlength: 2
                 },
+                Email: "required",
                 Divisi: {
+                    required: true,
+                },
+                Role: {
+                    required: true,
+                },
+                Jabatan: {
                     required: true,
                 },
                 Username: {
@@ -93,8 +129,15 @@
                     required: "Please fill the Name",
                     minlength: "Name must consist at least 2 character"
                 },
+                Email: "Please fill the Email",
                 Divisi: {
                     required: "Please fill the Division",
+                },
+                Role: {
+                    required: "Please fill the Role",
+                },
+                Jabatan: {
+                    required: "Please fill the Jabatan",
                 },
                 Username: {
                     required: "Please fill the Username",

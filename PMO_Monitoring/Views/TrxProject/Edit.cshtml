@@ -1,0 +1,126 @@
+﻿@using PMO_Monitoring.viewmodel
+@model VMTrxProject
+
+@{
+    Layout = null;
+    var idRole = Context.Session.GetInt32("IdRole");
+}
+<form class="mt-4" id="edit">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3 row">
+                <div class="col-sm-8">
+                    <input type="hidden" class="form-control" id="Id" name="Id" value="@Model.Id" readonly>
+                </div>
+
+            </div>
+            <div class="mb-3 row">
+                <label for="Projectname" class="col-sm-4 col-from-label">Project Name</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Projectname" name="Projectname" value="@Model.Projectname"></input>
+                    <span asp-validation-for="Projectname" class="text-danger"></span>
+                </div>
+            </div>
+            @{
+                if (idRole == 1)
+                {
+                    <div class="mb-3 row">
+                        <label for="Divisiid" class="col-sm-4 col-from-label">Divisi</label>
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(x=>x.Divisiid,
+                    new SelectList(ViewBag.DropDownDivisi,"Id","Name"),
+                    "--Pilih Divisi--",
+                    new{@class="form-control"})
+                            <span asp-validation-for="Divisiid" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <input type="hidden" class="form-control" id="Divisiid" name="Divisiid" value="@Model.Divisiid">
+                    <div class="mb-3 row">
+                        <label for="NamaDivisi" class="col-sm-4 col-from-label">Divisi</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="NamaDivisi" name="NamaDivisi" value="@Model.NamaDivisi" readonly></input>
+                            <span asp-validation-for="NamaDivisi" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+            }
+            <div class="mb-3 row">
+                <label for="Keterangan" class="col-sm-4 col-from-label">Keterangan</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Keterangan" name="Keterangan" value="@Model.Keterangan"></input>
+                    <span asp-validation-for="Keterangan" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="float-right">
+        <a asp-action="Index" class="btn btn-light">Batal</a>
+        <button type="submit" class="btn btn-primary" id="ubah">Simpan</button>
+    </div>
+</form>
+
+<script>
+
+    $(document).ready(function () {
+        var isvalid = true
+        $("#edit").validate({
+            errorClass: "text-danger",
+            rules: {
+                Projectname: {
+                    required: true,
+                    minlength: 2
+                },
+                Divisi: {
+                    required: true,
+                },
+                Keterangan: {
+                    required: true,
+                    minlength: 2
+                },
+                Password: {
+                    required: true,
+                    strong_password: true
+                }
+            },
+            messages: {
+                Projectname: {
+                    required: "Please fill the Project Name",
+                    minlength: "Project Name must consist at least 2 character"
+                },
+                Divisi: {
+                    required: "Please fill the Division",
+                },
+                Keterangan: {
+                    required: "Please fill the Keterangan",
+                    minlength: "Name must consist at least 2 character"
+                }
+            },
+            submitHandler: function (form) {
+                debugger
+                var data = $("#edit").serialize()
+                if (isvalid) {
+                    $.ajax({
+                        url: "/TrxProject/Edit",
+                        data: data,
+                        type: 'post',
+                        dataType: "json",
+                        success: function (respon) {
+                            debugger
+                            if (respon) {
+                                alert(respon.message)
+                                window.location.reload()
+                            }
+                        }
+                    })
+                }
+                else {
+                    alert("Data tidak Berhasil Disimpan")
+                }
+            }
+        })
+    })
+</script>

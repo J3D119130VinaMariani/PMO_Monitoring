@@ -1,0 +1,100 @@
+﻿@using PMO_Monitoring.viewmodel
+@model VMMstWorkflow
+@{
+    Layout = null;
+}
+<form class="mt-4" id="create">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3 row">
+                <label for="Menuid" class="col-sm-4 col-from-label">Menu</label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(x=>x.Menuid,
+                    new SelectList(ViewBag.DropDownMenu,"Id","Nama"),
+                    "--Pilih Menu--",
+                    new{@class="form-control"})
+                    <span asp-validation-for="Menuid" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="Sequence" class="col-sm-4 col-from-label">Sequence</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="Sequence" name="Sequence"></input>
+                    <span asp-validation-for="Sequence" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="mb-3 row">
+                <label for="Jabatanid" class="col-sm-4 col-from-label">Jabatan</label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(x=>x.Jabatanid,
+                    new SelectList(ViewBag.DropDownJabatan,"Id","Nama"),
+                    "--Pilih Jabatan--",
+                    new{@class="form-control"})
+                    <span asp-validation-for="Jabatanid" class="text-danger"></span>
+                </div>
+            </div>
+    </div>
+    </div>
+    <div class="float-right">
+        <a asp-action="Index" class="btn btn-light">Batal</a>
+        <button type="submit" class="btn btn-primary" id="tambah">Simpan</button>
+    </div>
+</form>
+
+<script>
+
+    $(document).ready(function () {
+        var isvalid = true
+        $("#create").validate({
+            errorClass: "text-danger",
+            rules: {
+                Menuid: {
+                    required: true
+                },
+                Sequence: {
+                    required: true
+                },
+                Jabatanid: {
+                    required: true
+                }
+            },
+            messages: {
+                Menuid: {
+                    required: "Please fill the Menu"
+                },
+                Sequence: {
+                    required: "Please fill the Sequence"
+                },
+                Jabatanid: {
+                    required: "Please fill the Jabatan"
+                }
+            },
+            submitHandler: function (form) {
+                debugger
+                var data = $("#create").serialize()
+                if (isvalid) {
+                    $.ajax({
+                        url: "/MstWorkflow/Create",
+                        data: data,
+                        type: 'post',
+                        dataType: "json",
+                        success: function (respon) {
+                            debugger
+                            if (respon) {
+                                alert(respon.message)
+                                window.location.reload()
+                            }
+                        }
+                    })
+                }
+                else {
+                    alert("Data tidak Berhasil Disimpan")
+                }
+            }
+        })     
+
+    })
+
+</script>

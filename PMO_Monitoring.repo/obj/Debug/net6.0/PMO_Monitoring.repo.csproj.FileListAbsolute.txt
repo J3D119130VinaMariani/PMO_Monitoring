@@ -65,3 +65,6 @@ E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.repo\bin\D
 E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.repo\bin\Debug\net6.0\PMO_Monitoring.datamodels.pdb
 E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.repo\bin\Debug\net6.0\PMO_Monitoring.viewmodel.pdb
 E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.repo\obj\Debug\net6.0\PMO_Monitoring.repo.csproj.CopyComplete
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.repo\bin\Debug\net6.0\Antlr3.Runtime.dll
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.repo\bin\Debug\net6.0\Newtonsoft.Json.dll
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring.repo\bin\Debug\net6.0\WebGrease.dll

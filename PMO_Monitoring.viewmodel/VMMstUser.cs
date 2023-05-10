@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace PMO_viewmodel
+namespace PMO_Monitoring.viewmodel
 {
     public class VMMstUser
     {
@@ -13,11 +13,11 @@ namespace PMO_viewmodel
         public int Id { get; set; }
         [Column("username")]
         [StringLength(100)]
-
+        
         public string Username { get; set; } = null!;
         [Column("password")]
         [StringLength(255)]
-      
+        
         public string Password { get; set; } = null!;
         [Column("nama")]
         [StringLength(200)]
@@ -25,6 +25,10 @@ namespace PMO_viewmodel
         public string Nama { get; set; } = null!;
         [Column("divisi")]
         public int Divisi { get; set; }
+        [Column("role")]
+        public int Role { get; set; }
+        [Column("jabatan")]
+        public int Jabatan { get; set; }
         [Column("createdby")]
         public int Createdby { get; set; }
         [Column("createddate", TypeName = "datetime")]
@@ -37,5 +41,14 @@ namespace PMO_viewmodel
         public bool Deleted { get; set; }
 
         public string Password2 { get; set; }
+        public string NamaDivisi { get; set; } = null!;
+        public string NamaJabatan { get; set; }
+        public string NamaRole { get; set; }
+        public string Email { get; set; }
+        public string Token { get; set; }
+        public string NamaMenu { get; set; }
+        public string PathMenu { get; set; }
+        public int IdMenu { get; set; }
+
     }
 }

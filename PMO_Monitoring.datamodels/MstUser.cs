@@ -26,6 +26,10 @@ namespace PMO_Monitoring.datamodels
         public string Nama { get; set; } = null!;
         [Column("divisi")]
         public int Divisi { get; set; }
+        [Column("role")]
+        public int Role { get; set; }
+        [Column("jabatan")]
+        public int Jabatan { get; set; }
         [Column("createdby")]
         public int Createdby { get; set; }
         [Column("createddate", TypeName = "datetime")]
@@ -36,5 +40,9 @@ namespace PMO_Monitoring.datamodels
         public DateTime? Updateddate { get; set; }
         [Column("deleted")]
         public bool Deleted { get; set; }
+        [Column("email")]
+        [StringLength(255)]
+        [Unicode(false)]
+        public string Email { get; set; } = null!;
     }
 }

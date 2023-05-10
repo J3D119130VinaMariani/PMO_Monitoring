@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "PMO_Monitoring.viewmodel/1.0.0": {
+        "runtime": {
+          "PMO_Monitoring.viewmodel.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PMO_Monitoring.viewmodel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

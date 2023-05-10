@@ -1,0 +1,19 @@
+﻿@using PMO_Monitoring.viewmodel
+@model VMMstRole
+@{
+    Layout = null;
+}
+<form asp-action="Delete" method="post">
+    <div class="mb-3 row">
+        <div class="col-sm-8">
+            <input type="hidden" class="form-control" id="Id" name="Id" value="@Model.Id" readonly>
+        </div>
+        <div class="col-sm-8">
+            <h3>Apakah Anda Yakin Ingin Menghapus Nama Role @Model.Name</h3>
+        </div>
+    </div>
+    <div class="float-right">
+        <button type="submit" class="btn btn-primary">Delete</button>
+        <a asp-action="Index" class="btn btn-light">Back to List</a>
+    </div>
+</form>

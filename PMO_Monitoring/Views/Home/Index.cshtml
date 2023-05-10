@@ -1,8 +1,174 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using PMO_Monitoring.viewmodel
+@model List<VMTrxProject>
+@inject PMO_Monitoring.repo.MstHomeRepo Home
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Gauge Test</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background: #fff
+        }</style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-body">
+            <center>
+                <h3 class="card-title">Dashboard</h3>
+            </center>
+            <hr>
+            <ul class="list-style-none mb-0">
+                <li>
+                    <i class="fas fa-circle text-muted font-12 mr-2 ml-5"></i>
+                    <span class="text-muted">Not Started (BM)</span>
+                </li>
+                <li class="mt-3">
+                    <i class="fas fa-circle text-success font-12 mr-2 ml-5"></i>
+                    <span class="text-muted">On Progress (P)</span>                    
+                </li>
+                <li class="mt-3">
+                    <i class="fas fa-circle text-danger font-12 mr-2 ml-5"></i>
+                    <span class="text-muted">Past Due (PD)</span>
+                </li>
+                <li class="mt-3">
+                    <i class="fas fa-circle text-primary font-12 mr-2 ml-5"></i>
+                    <span class="text-muted">Done(D)</span>
+                </li>
+            </ul>
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="row">
+                        @foreach (VMTrxProject data in Model)
+                        {
+                            var segmen = Home.getAllDataAktifitas(data.Divisiid, data.Id);
+                            var Progress = Home.getActualProgress(data.Id);
+                            var persentaseDate = Home.getDateProgress(data.Id);
+                            //var x = "{ \"from\":" + segmen[i].from + ", \"to\":" + segmen[i].to + ", \"color\":\" " + segmen[i].rgba + " },";
+                            <div class="col-lg-6 col-md-6">
+                                <div class="card">
+                                    <center>
+                                        <h4 class="card-title">@data.Projectname</h4>
+
+                                        <canvas data-type="radial-gauge"
+                                            data-width="400"
+                                            data-height="400"
+                                            data-units="Progress"
+                                            data-title="false"
+                                            data-value="@Progress"
+                                            data-animate-on-init="true"
+                                            data-animated-value="true"
+                                            data-min-value="0"
+                                            data-max-value="100"
+                                            data-major-ticks="0,10,20,30,40,50,60,70,80,90,100"
+                                            data-minor-ticks="2"
+                                            data-stroke-ticks="false"
+                                            data-highlights='[
+                                                                @segmen
+                                                                        @*{ "from":0,"to":25,"color":"rgba( 169, 169, 169, 1)"},
+                                                                        { "from":25,"to":50,"color":"rgba(0,255,0,.15)"},
+                                                                        { "from":50,"to":75,"color":"rgba(255,30,0,.25)"},
+                                                                        { "from":75,"to":100,"color":"rgba(0,0,255,.25)"}*@
+                                                                 ]'
+                                            data-color-plate="#000000"
+                                            data-color-major-ticks="#f5f5f5"
+                                            data-color-minor-ticks="#ddd"
+                                            data-color-title="#fff"
+                                            data-color-units="#ccc"
+                                            data-color-numbers="#eee"
+                                            data-color-needle-start="rgba(240, 128, 128, 1)"
+                                            data-color-needle-end="rgba(255, 160, 122, .9)"
+                                            data-value-box="true"
+                                            data-animation-rule="linear"
+                                            data-animation-duration="500"
+                                            data-border-outer-width="3"
+                                            data-border-middle-width="3"
+                                            data-border-inner-width="3"></canvas>
+
+                                        <canvas data-type="radial-gauge"
+                                            data-width="400"
+                                            data-height="400"
+                                            data-units="Actual Date Progress"
+                                            data-title="false"
+                                            data-value="@persentaseDate"
+                                            data-animate-on-init="true"
+                                            data-animated-value="true"
+                                            data-min-value="0"
+                                            data-max-value="100"
+                                            data-major-ticks="0,10,20,30,40,50,60,70,80,90,100"
+                                            data-minor-ticks="2"
+                                            data-stroke-ticks="false"
+                                            data-highlights='[@segmen]'
+                                            data-color-plate="#000000"
+                                            data-color-major-ticks="#f5f5f5"
+                                            data-color-minor-ticks="#ddd"
+                                            data-color-title="#fff"
+                                            data-color-units="#ccc"
+                                            data-color-numbers="#eee"
+                                            data-color-needle-start="rgba(240, 128, 128, 1)"
+                                            data-color-needle-end="rgba(255, 160, 122, .9)"
+                                            data-value-box="true"
+                                            data-animation-rule="linear"
+                                            data-animation-duration="500"
+                                            data-border-outer-width="3"
+                                            data-border-middle-width="3"
+                                            data-border-inner-width="3"></canvas>
+                                    </center>
+                                </div>
+                            </div>
+                        }                       
+                    </div>
+                </div>
+            </div>
+
+            <script>
+
+                @inject PMO_Monitoring.repo.MstHomeRepo HomeRepo
+                     if (!Array.prototype.forEach) {
+                    Array.prototype.forEach = function (cb) {
+                        var i = 0, s = this.length;
+                        for (; i < s; i++) {
+                            cb && cb(this[i], i, this);
+                        }
+                    }
+                }
+
+                document.fonts && document.fonts.forEach(function (font) {
+                    font.loaded.then(function () {
+                        if (font.family.match(/Led/)) {
+                            document.gauges.forEach(function (gauge) {
+                                gauge.update();
+                                gauge.options.renderTo.style.visibility = 'visible';
+                            });
+                        }
+                    });
+                });
+
+                var timers = [];
+
+                function animateGauges() {
+
+                    document.gauges.forEach(function (gauge) {
+                        timers.push(setInterval(function () {
+                            debugger
+                            gauge.value = Math.random() *
+                                (gauge.options.maxValue - gauge.options.minValue) / 4 +
+                                gauge.options.minValue / 4;
+                        }, gauge.animation.duration + 50));
+                    });
+                }
+
+                function stopGaugesAnimation() {
+                    timers.forEach(function (timer) {
+                        clearInterval(timer);
+                    });
+                }
+            </script>
+            <script async src="~/canvas-gauges-master/gauge.min.js" onload="initScriptedGauges()"></script>
+        </div>
+    </div>
+</body>
+</html>

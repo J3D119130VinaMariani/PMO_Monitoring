@@ -1,0 +1,54 @@
+﻿@using PMO_Monitoring.viewmodel
+@model VMMstRoleAccess
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-6">
+        <input type="hidden" class="form-control" id="Id" name="Id" value="@Model.Id" readonly>
+        <div class="mb-3 row">
+            <label for="Menuid" class="col-sm-4 col-from-label">Menu Id</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Menuid" name="Menuid" value="@Model.Menuid" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="NamaMenu" class="col-sm-4 col-from-label">Menu</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="NamaMenu" name="NamaMenu" value="@Model.NamaMenu" readonly></input>
+
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Roleid" class="col-sm-4 col-from-label">Role Id</label>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" id="Roleid" name="Roleid" value="@Model.Roleid" readonly></input>
+
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="NamaRole" class="col-sm-4 col-from-label">Nama Role</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="NamaRole" name="NamaRole" value="@Model.NamaRole" readonly></input>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="mb-3 row">
+            <label for="Createdby" class="col-sm-4 col-from-label">CreateBy</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Createdby" name="Createdby" value="@Model.Createdby" readonly></input>
+            </div>
+
+        </div>
+        <div class="mb-3 row">
+            <label for="Createddate" class="col-sm-4 col-from-label">CreateDate</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Createddate" name="Createddate" value="@Model.Createddate" readonly></input>
+            </div>
+        </div>
+    </div>
+</div>
+

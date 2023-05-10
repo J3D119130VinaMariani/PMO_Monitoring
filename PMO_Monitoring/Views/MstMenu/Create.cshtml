@@ -1,0 +1,101 @@
+﻿@using PMO_Monitoring.viewmodel
+@model VMMstMenu
+
+@{
+    Layout = null;
+}
+<form class="mt-4" id="create">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3 row">
+                <label for="Modul" class="col-sm-4 col-from-label">Modul</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Modul" name="Modul"></input>
+                    <span asp-validation-for="Modul" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="mb-3 row">
+                <label for="Nama" class="col-sm-4 col-from-label">Nama</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Name" name="Nama"></input>
+                    <span asp-validation-for="Nama" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="Path" class="col-sm-4 col-from-label">Path</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Path" name="Path"></input>
+                    <span asp-validation-for="Path" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="float-right">
+        <a asp-action="Index" class="btn btn-light">Batal</a>
+        <button type="submit" class="btn btn-primary" id="tambah">Simpan</button>
+    </div>
+</form>
+
+<script>
+
+    $(document).ready(function () {
+        var isvalid = true
+        $("#create").validate({
+            errorClass: "text-danger",
+            rules: {
+                Modul: {
+                    required: true,
+                    minlength: 2
+                },
+                Nama: {
+                    required: true,
+                    minlength: 2
+                },
+                Path: {
+                    required: true,
+                    minlength: 2
+                }
+            },
+            messages: {
+                Modul: {
+                    required: "Please fill the Modul",
+                    minlength: "Acronim must consist at least 2 character"
+                },
+                Nama: {
+                    required: "Please fill the Name",
+                    minlength: "Name must consist at least 2 character"
+                },
+                Path: {
+                    required: "Please fill the Path",
+                    minlength: "Name must consist at least 2 character"
+                }
+            },
+            submitHandler: function (form) {
+                debugger
+                var data = $("#create").serialize()
+                if (isvalid) {
+                    $.ajax({
+                        url: "/MstMenu/Create",
+                        data: data,
+                        type: 'post',
+                        dataType: "json",
+                        success: function (respon) {
+                            debugger
+                            if (respon) {
+                                alert(respon.message)
+                                window.location.reload()
+                            }
+                        }
+                    })
+                }
+                else {
+                    alert("Data tidak Berhasil Disimpan")
+                }
+            }
+        })
+
+    })
+
+</script>

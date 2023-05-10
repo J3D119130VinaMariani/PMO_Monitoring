@@ -1,0 +1,218 @@
+﻿@using PMO_Monitoring.viewmodel
+@model List<VMTrxDaftarAktifitas>
+@inject PMO_Monitoring.repo.TrxDaftarAktifitasRepo DakRep
+@{
+    var idrole = Context.Session.GetInt32("IdRole");
+    var idDivisi = Context.Session.GetInt32("IdDivisi");
+    var datProject = DakRep.getAllDataProject(idDivisi);
+}
+
+<form asp-action="Index" method="get" id="form_search">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Daftar Aktifitas</h4>
+                    <div class="col-12">
+                        <div class="custimize-input float-right">
+                            <div class="input-group">
+                                <input type="text" id="SearchString" name="SearchString" value="@ViewBag.Search" class="form-control form-control-sm" placeholder="Search" />
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text" id="btn_search">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div class="input-group-text" id="btn_reset">
+                                        <i class="fas fa-redo"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @if (idrole != 4)
+                    {
+                        <button type="button" class="btn btn-primary" id="btnCreate">Create</button>
+                    }
+                    <p        </p>
+                    <table class="table table-hover"
+            <thead>
+                <tr>
+                    <th> Divisi </th>
+                    <th> Project Name </th>
+                    <th> Urutan </th>
+                    <th> Aktifitas </th>
+                    <th> Keterangan </th>
+                    <th> Status </th>
+                    <th> Startdate </th>
+                    <th> Enddate </th>
+                    <th> Actual Startdate </th>
+                    <th> Actual Enddate </th>
+                    <th> Progress </th>
+                    <th> Actual Progress </th>
+                    <th> <center>Approval Status</center></th>
+                    <th> Komentar</th>
+                    <th> Action </th>
+                </tr>
+            </thead>
+            <tbody>
+                            @{
+                                foreach (VMTrxDaftarAktifitas item in datProject)
+                                {
+                                    var datum = DakRep.getAllData(idDivisi, item.Projectid);
+                                    var approv = DakRep.getApprov(item.Projectid);
+                                    <tr>
+                                        @for (int i = 0; i < datum.Count(); i++)
+                                        {
+                                             <tr>
+                                                 <td>@datum[i].NamaDivisi</td>
+                                                 <td>@datum[i].Projectname</td>
+                                                 <td>@datum[i].Urutan</td>
+                                                 <td>@datum[i].Aktifitas</td>
+                                                 <td>@datum[i].Keterangan</td>
+                                                 <td>@datum[i].CodeStatus</td>
+                                                 <td>@datum[i].Startdate.ToString("dd/MM/yyyy")</td>
+                                                 <td>@datum[i].Enddate.ToString("dd/MM/yyyy")</td>
+                                                 <td>@datum[i].ActualStartdate?.ToString("dd/MM/yyyy")</td>
+                                                 <td>@datum[i].ActualEnddate?.ToString("dd/MM/yyyy")</td>
+                                                 <td>@datum[i].Progress</td>
+                                                 <td>@datum[i].ActualProgress</td>
+                                                 
+                                                 @if (approv.Count() == 1 && approv[0].Approvalstatus != null)
+                                                 {
+                                                    <td><center>@datum[i].Approvalstatus</center></td>
+                                                 }
+                                                else
+                                                {
+                                                    @if (idrole == 4)
+                                                    {
+                                                       
+                                                        @if ( i == 0)
+                                                        {
+                                                            //@if (approv.Count() == 1 && approv[0].Approvalstatus != null)
+                                                            //{
+                                                            //    <center><a>@approv[0].Approvalstatus</a></center>
+                                                            //}
+                                                            //else
+                                                            //{ 
+                                                            // 
+                                                            <td rowspan="@datum.Count()">
+                                                                  <center><a class="btn btn-primary btn_approv " style="color:white" data-id="@datum[i].Projectid">Approv</a></center>
+                                                                  <center><a class="btn btn-primary btn_reject " style="color:white" data-id="@datum[i].Projectid">Reject</a></center>
+                                                             </td>
+                                                        } 
+                                                    }
+                                                    else
+                                                    {
+                                                        <td><center>@datum[i].Approvalstatus</center></td>
+                                                    }
+                                                }
+                                                <td>@datum[i].Komentar</td>
+                                                <td>
+                                                    @{
+                                                        if (idrole == 4)
+                                                        {
+                                                               <a class="btn btn-primary btn_detail " style="color:white" data-id="@datum[i].Id">Detail</a>                                                      
+                                                            if (datum[i].Komentar == null)
+                                                            {
+                                                               <a class="btn btn-primary btn_komentar " style="color:white" data-id="@datum[i].Id">Komentar</a>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                               <a class="btn btn-primary btn_edit" style="color:white" data-id="@datum[i].Id">Edit</a>
+                                                               <a class="btn btn-primary btn_delete" style="color:white" data-id="@datum[i].Id">Delete</a>
+                                                               <a class="btn btn-primary btn_detail " style="color:white" data-id="@datum[i].Id">Detail</a>
+
+                                                        }
+                                                    }
+                                                </td>
+
+                                             </tr>
+                                        }
+                                    </tr>
+                                }
+
+                            }
+            </tbody>
+            </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $("#btnCreate").click(function () {
+            $("#myModalLabel").empty()
+            $("#myModalLabel").text("Create")
+            $("#body_modal").load("/TrxDaftarAktifitas/Create")
+            $("#myModal").modal("show")
+        })
+        $(".btn_edit").click(function () {
+            var id = $(this).data("id")
+            $("#myModalLabel").text("Edit")
+            $("#body_modal").load("TrxDaftarAktifitas/Edit?id=" + id)
+            $("#myModal").modal("show")
+        })
+        $(".btn_delete").click(function () {
+            var id = $(this).data("id")
+            $("#myModalLabel").text("Delete")
+            $("#body_modal").load("TrxDaftarAktifitas/Delete?id=" + id)
+            $("#myModal").modal("show")
+        })
+        $(".btn_detail").click(function () {
+            var id = $(this).data("id")
+            $("#myModalLabel").text("Detail")
+            $("#body_modal").load("TrxDaftarAktifitas/Detail?id=" + id)
+            $("#myModal").modal("show")
+        })
+        $(".btn_komentar").click(function () {
+            var id = $(this).data("id")
+            $("#myModalLabel").text("Komentar")
+            $("#body_modal").load("TrxDaftarAktifitas/Komentar?id=" + id)
+            $("#myModal").modal("show")
+        })
+        $(".btn_approv").click(function () {
+            debugger
+            var id = $(this).data("id")
+            $.ajax({
+                url: "/TrxDaftarAktifitas/Approv",
+                data: { idProject: id },
+                type: 'post',
+                dataType: "json",
+                success: function (respon) {
+                    debugger
+                    if (respon) {
+                        alert(respon.message)
+                        window.location.reload()
+                    }
+                }
+            })
+        })
+        $(".btn_reject").click(function () {
+            debugger
+            var id = $(this).data("id")
+            $.ajax({
+                url: "/TrxDaftarAktifitas/Reject",
+                data: { idProject: id },
+                type: 'post',
+                dataType: "json",
+                success: function (respon) {
+                    debugger
+                    if (respon) {
+                        alert(respon.message)
+                        window.location.reload()
+                    }
+                }
+            })
+        })
+        $("#btn_search").click(function () {
+            $("#form_search").submit()
+        })
+        $("#btn_reset").click(function () {
+            $("#form_search").empty()
+            $("#form_search").submit()
+        })
+    })
+
+</script>

@@ -1,5 +1,6 @@
-﻿@using PMO_viewmodel
-@model List<VMMstUser>
+﻿@using PMO_Monitoring.viewmodel
+@using PMO_Monitoring.Services
+@model PaginatedList<VMMstUser>
 
 
 <form asp-action="Index" method="get" id="form_search">
@@ -23,7 +24,9 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" id="btnCreate">Create</button>
+
+                        <button type="button" class="btn btn-primary" id="btnCreate">Create</button>
+
                     <p        </p>
                     <table class="table table-hover"
             <thead>
@@ -31,7 +34,10 @@
                     <th> Username</th>
                     <th> Password</th>
                     <th> Nama</th>
+                    <th> Email </th>
                     <th> Divisi </th>
+                    <th> Jabatan </th>
+                    <th> Role </th>
                     <th> Action </th>
                 </tr>
             </thead>
@@ -43,17 +49,73 @@
                                         <td>@data.Username</td>
                                         <td>@data.Password</td>
                                         <td>@data.Nama</td>
-                                        <td>@data.Divisi</td>
+                                        <td>@data.Email</td>
+                                        <td>@data.NamaDivisi</td>
+                                        <td>@data.NamaJabatan</td>
+                                        <td>@data.NamaRole</td>
                                         <td>
-                                            <a class="btn btn-primary btn_edit" style="color:white" data-id="@data.Id">Edit</a>
-                                            <a class="btn btn-primary btn_delete" style="color:white" data-id="@data.Id">Delete</a>
-                                            <a class="btn btn-primary btn_detail " style="color:white" data-id="@data.Id">Detail</a>
+                                                                    <a class="btn btn-primary btn_edit" style="color:white" data-id="@data.Id">Edit</a>
+                                                                    <a class="btn btn-primary btn_delete" style="color:white" data-id="@data.Id">Delete</a>
+                                                                    <a class="btn btn-primary btn_detail " style="color:white" data-id="@data.Id">Detail</a>
+
                                         </td>
                                     </tr>
                                 }
                             }
             </tbody>
             </table>
+                    <center>
+                        @{
+                            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                            var prev = "<<";
+
+                        }
+                        @{
+                            if (prevDisabled == "disabled")
+                            {
+                                <a asp-action="Index"
+                           asp-route-pageNumber="@(Model.PageIndex - 1)"
+                           asp-route-currentFilter="@ViewBag.Search"
+                           class="btn btn-outline-primary @prevDisabled">
+                                    @prev
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-action="Index"
+                           asp-route-pageNumber="@(Model.PageIndex - 1)"
+                           asp-route-currentFilter="@ViewBag.Search"
+                           class="btn btn-primary @prevDisabled">
+                                    @prev
+                                </a>
+                            }
+                        }
+
+                        <a>
+                            Page @Model.PageIndex
+                        </a>
+                        @{
+                            if (nextDisabled == "disabled")
+                            {
+                                <a asp-action="Index"
+                           asp-route-pageNumber="@(Model.PageIndex + 1)"
+                           asp-route-currentFilter="@ViewBag.Search"
+                           class="btn btn-outline-primary @nextDisabled">
+                                    >>
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-action="Index"
+                           asp-route-pageNumber="@(Model.PageIndex + 1)"
+                           asp-route-currentFilter="@ViewBag.Search"
+                           class="btn btn-primary @nextDisabled">
+                                    >>
+                                </a>
+                            }
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,6 +147,13 @@
             $("#myModalLabel").text("Detail")
             $("#body_modal").load("MstUser/Detail?id=" + id)
             $("#myModal").modal("show")
+        })
+        $("#btn_search").click(function () {
+            $("#form_search").submit()
+        })
+        $("#btn_reset").click(function () {
+            $("#form_search").empty()
+            $("#form_search").submit()
         })
     })
 

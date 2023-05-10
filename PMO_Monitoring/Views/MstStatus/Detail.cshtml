@@ -1,0 +1,55 @@
+﻿@using PMO_Monitoring.viewmodel
+@model VMMstStatus
+
+@{
+    Layout = null;
+}
+<form class="mt-4" id="edit">
+
+    <div class="row">
+        <div class="col-md-6">
+            <input type="hidden" class="form-control" id="Id" name="Id" value="@Model.Id" readonly>
+            <div class="mb-3 row">
+                <label for="Code" class="col-sm-4 col-from-label">Code</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Code" name="Code" value="@Model.Code" readonly></input>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="Keterangan" class="col-sm-4 col-from-label">Keterangan</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Keterangan" name="Keterangan" value="@Model.Keterangan" readonly></input>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3 row">
+                <label for="Createdby" class="col-sm-4 col-from-label">CreateBy</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Createdby" name="Createdby" value="@Model.Createdby" readonly></input>
+                </div>
+
+            </div>
+            <div class="mb-3 row">
+                <label for="Createddate" class="col-sm-4 col-from-label">CreateDate</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Createddate" name="Createddate" value="@Model.Createddate" readonly></input>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="Updatedby" class="col-sm-4 col-from-label">UpdatedBy</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Updatedby" name="Updatedby" value="@Model.Updatedby" readonly></input>
+                </div>
+
+            </div>
+            <div class="mb-3 row">
+                <label for="Updateddate" class="col-sm-4 col-from-label">UpdatedDate</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Updateddate" name="Updateddate" value="@Model.Updateddate" readonly></input>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

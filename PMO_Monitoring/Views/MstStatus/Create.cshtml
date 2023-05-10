@@ -1,0 +1,86 @@
+﻿@using PMO_Monitoring.viewmodel
+@model VMMstStatus
+
+@{
+    Layout = null;
+}
+<form class="mt-4" id="create">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3 row">
+                <label for="Code" class="col-sm-4 col-from-label">Code</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Code" name="Code"></input>
+                    <span asp-validation-for="Code" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="mb-3 row">
+                <label for="Keterangan" class="col-sm-4 col-from-label">Keterangan</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Keterangan" name="Keterangan"></input>
+                    <span asp-validation-for="Keterangan" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="float-right">
+        <a asp-action="Index" class="btn btn-light">Batal</a>
+        <button type="submit" class="btn btn-primary" id="tambah">Simpan</button>
+    </div>
+</form>
+
+<script>
+
+    $(document).ready(function () {
+        var isvalid = true
+        $("#create").validate({
+            errorClass: "text-danger",
+            rules: {
+                Code: {
+                    required: true,
+                    minlength: 2
+                },
+                Keterangan: {
+                    required: true,
+                    minlength: 2
+                }
+            },
+            messages: {
+                Code: {
+                    required: "Please fill the Code",
+                    minlength: "Acronim must consist at least 2 character"
+                },
+                Keterangan: {
+                    required: "Please fill the Keterangan",
+                    minlength: "Name must consist at least 2 character"
+                }
+            },
+            submitHandler: function (form) {
+                debugger
+                var data = $("#create").serialize()
+                if (isvalid) {
+                    $.ajax({
+                        url: "/MstStatus/Create",
+                        data: data,
+                        type: 'post',
+                        dataType: "json",
+                        success: function (respon) {
+                            debugger
+                            if (respon) {
+                                alert(respon.message)
+                                window.location.reload()
+                            }
+                        }
+                    })
+                }
+                else {
+                    alert("Data tidak Berhasil Disimpan")
+                }
+            }
+        })
+
+    })
+
+</script>

@@ -1,4 +1,4 @@
-﻿@using PMO_viewmodel
+﻿@using PMO_Monitoring.viewmodel
 @model VMMstUser
 
 @{
@@ -12,56 +12,97 @@
             <div class="mb-3 row">
                 <label for="Nama" class="col-sm-4 col-from-label">Nama</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="Nama" name="Nama" value="@Model.Nama"></input>
+                    <input type="text" class="form-control" id="Nama" name="Nama" value="@Model.Nama" readonly></input>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="Email" class="col-sm-4 col-from-label">Email</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Email" name="Email" value="@Model.Email" readonly></input>
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="Divisi" class="col-sm-4 col-from-label">Divisi</label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control" id="Divisi" name="Divisi" value="@Model.Divisi"></input>
+                    <input type="number" class="form-control" id="Divisi" name="Divisi" value="@Model.Divisi" readonly></input>
 
                 </div>
             </div>
             <div class="mb-3 row">
+                <label for="NamaDivisi" class="col-sm-4 col-from-label">Nama Divisi</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="NamaDivisi" name="NamaDivisi" value="@Model.NamaDivisi" readonly></input>
+
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="Jabatan" class="col-sm-4 col-from-label">Jabatan</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="Jabatan" name="Jabatan" value="@Model.Jabatan" readonly></input>
+
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="NamaJabatan" class="col-sm-4 col-from-label">Nama Jabatan</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="NamaJabatan" name="NamaJabatan" value="@Model.NamaJabatan" readonly></input>
+
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="Role" class="col-sm-4 col-from-label">Role</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="Role" name="Role" value="@Model.Role" readonly></input>
+
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="NamaRole" class="col-sm-4 col-from-label">Nama Role</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="NamaRole" name="NamaRole" value="@Model.NamaRole" readonly></input>
+
+                </div>
+            </div>            
+
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3 row">
                 <label for="Username" class="col-sm-4 col-from-label">Username</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="Username" name="Username" value="@Model.Username"></input>
+                    <input type="text" class="form-control" id="Username" name="Username" value="@Model.Username" readonly></input>
                 </div>
 
             </div>
             <div class="mb-3 row">
                 <label for="Password" class="col-sm-4 col-from-label">Password</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="Password" name="Password" value="@Model.Password"></input>
+                    <input type="text" class="form-control" id="Password" name="Password" value="@Model.Password" readonly></input>
                 </div>
             </div>
-
-        </div>
-        <div class="col-md-6">
             <div class="mb-3 row">
                 <label for="Createdby" class="col-sm-4 col-from-label">CreateBy</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="Createdby" name="Createdby" value="@Model.Createdby"></input>
+                    <input type="text" class="form-control" id="Createdby" name="Createdby" value="@Model.Createdby" readonly></input>
                 </div>
 
             </div>
             <div class="mb-3 row">
                 <label for="Createddate" class="col-sm-4 col-from-label">CreateDate</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="Createddate" name="Createddate" value="@Model.Createddate"></input>
+                    <input type="text" class="form-control" id="Createddate" name="Createddate" value="@Model.Createddate" readonly></input>
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="Updatedby" class="col-sm-4 col-from-label">UpdatedBy</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="Updatedby" name="Updatedby" value="@Model.Updatedby"></input>
+                    <input type="text" class="form-control" id="Updatedby" name="Updatedby" value="@Model.Updatedby" readonly></input>
                 </div>
 
             </div>
             <div class="mb-3 row">
                 <label for="Updateddate" class="col-sm-4 col-from-label">UpdatedDate</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="Updateddate" name="Updateddate" value="@Model.Updateddate"></input>
+                    <input type="text" class="form-control" id="Updateddate" name="Updateddate" value="@Model.Updateddate" readonly></input>
                 </div>
             </div>
         </div>

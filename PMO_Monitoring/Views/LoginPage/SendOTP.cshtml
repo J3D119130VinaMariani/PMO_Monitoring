@@ -1,0 +1,88 @@
+﻿@using PMO_Monitoring.viewmodel
+@model VMMstUser
+
+@{
+    Layout = null;
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Kirim OTP</h4>
+                <p style="font-size:18px;color: darkgrey;">Masukkan email Anda.Kami akan melakukan pengecekkan</p>
+                <form class="md-float-material" id="lupapassword">
+                    <p style="font-size:14px;color: darkgrey;margin-top: 0;margin-bottom: 0;">Email*</p>
+                    <input type="email" id="Email" name="Email" class="form-control" placeholder="Your Email Address">
+                    <span id="Email" class="text-danger"></span>
+                    <span class="md-line"></span>
+                    <span id="validate_email" class="text-danger"></span>
+
+
+                    <div class="row m-t-30" style="justify-content: center;">
+                        <div class="col-md-5 mt-3">
+                            <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 btn-otp">Kirim OTP</button>
+                        </div>
+                        </hr>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end of form -->
+
+<script>
+    $("#Email").change(function () {
+        var email = $(this).val()
+        $.ajax({
+            url: "/LoginPage/CheckEmail",
+            data: { Email: email },
+            dataType: "json",
+            success: function (respon) {
+                if (respon == true) {
+                    $("#validate_email").empty()
+                    isvalid = true;
+
+                }
+                else {
+                    $("#validate_email").text("Email belum terdaftar")
+                    isvalid = false;
+                }
+            }
+        })
+    })
+    $("#lupapassword").validate({
+        errorClass: "text-danger",
+        rules: {
+            Email: "required"
+        },
+        messages: {
+            Email: "Please fill the Email"
+        },
+        submitHandler: function (form) {
+            debugger
+            var data = $("#lupapassword").serialize()
+            $.ajax({
+                url: "/LoginPage/GetOTP",
+                data: data,
+                type: 'post',
+                success: function (respon) {
+                    debugger
+                    if (respon.status == "success") {                       
+                        $("#body_modal").empty()
+                        $("#myModalLabel").text("INPUT OTP")
+                        $("#body_modal").load("LoginPage/InputOTP", respon.data)
+                        $("#myModal").modal("show")
+                    }
+                    else {
+                        alert("Gagal")
+                    }
+                }
+            })
+        }
+    })
+
+</script>

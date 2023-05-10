@@ -1,28 +1,47 @@
-﻿<aside class="left-sidebar" data-sidebarbg="skin6">
+﻿@using Microsoft.AspNetCore.Http
+@inject PMO_Monitoring.Controllers.LoginPageController menus
+@{
+    var iduser = Context.Session.GetInt32("IdUser");
+    var idrole = Context.Session.GetInt32("IdRole");
+    var getmenus = menus.GetMenu(idrole, iduser);
+}
+
+<aside class="left-sidebar" data-sidebarbg="skin6">
     <!-- Sidebar scroll-->
     <div class="scroll-sidebar" data-sidebarbg="skin6">
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav">
-            <ul id="sidebarnav">
-                <li class="sidebar-item">
-                    <a class="sidebar-link sidebar-link" asp-action="Index" asp-controller="Home"
+        @{
+            if (idrole != null)
+            {
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link sidebar-link" asp-action="Index" asp-controller="Home"
                        aria-expanded="false">
-                        <i data-feather="home" class="feather-icon"></i><span class="hide-menu">Dashboard</span>
-                    </a>
-                </li>
-                <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Master</span></li>
+                                <i data-feather="home" class="feather-icon"></i><span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="list-divider"></li>
+                        <li class="nav-small-cap"><span class="hide-menu">Master</span></li>
+                    </ul>
+                </nav>
 
-                <li class="sidebar-item">
-                    <a class="sidebar-link" asp-action="Index" asp-controller="MstUser"
+               foreach (var item in getmenus)
+               {
+                    <nav class="sidebar-nav">
+                        <ul id="sidebarnav">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link sidebar-link" asp-action="Index" asp-controller="@item.Path"
                        aria-expanded="false">
-                        <i data-feather="tag" class="feather-icon"></i><span class="hide-menu">
-                            Master User
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+                                    <i data-feather="home" class="feather-icon"></i><span class="hide-menu">@item.Nama</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                }
+            }
+            
+        }
+        <!-- Sidebar navigation-->
         <!-- End Sidebar navigation -->
     </div>
     <!-- End Sidebar scroll-->

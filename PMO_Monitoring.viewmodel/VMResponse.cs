@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MiniProject302.viewmodels
+namespace PMO_viewmodel
 {
     public class VMResponse
     {

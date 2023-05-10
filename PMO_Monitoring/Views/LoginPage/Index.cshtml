@@ -1,0 +1,80 @@
+﻿@using PMO_Monitoring.viewmodel
+@model VMMstUser
+
+<div class="auth-box row ml-5 mt-5">
+    <img class="col-lg-6 col-md-4 modal-bg-img img-fluid" src="~/adminmart/assets/images/KBI.png" />
+    <div class="col-lg-5 col-md-7 bg-white">
+        <div class="p-3">
+            <div class="text-center">
+                <img src="~/adminmart/assets/images/icon.png" alt="wrapkit">
+            </div>
+            <h2 class="mt-3 text-center">Sign In</h2>
+            <p class="text-center">Enter your Username and password to access PMO_Monitoring</p>
+            <form class="mt-4" id="LogIn">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="text-dark" for="Email">Username</label>
+                            <input class="form-control" id="Username" name="Username" type="Username" placeholder="enter your username">
+                            <span id="Username" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="text-dark" for="Password">Password</label>
+                            <input class="form-control" id="Password" name="Password" type="password" placeholder="enter your password">
+                            <span id="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <button type="submit" id="Sign_In" class="btn btn-block btn-dark">Sign In</button>
+                    </div>
+                    <div class="col-lg-12 text-center mt-3">
+                        Forgot the Password account? <a href="#" class="text-danger" id="LupaPass">Lupa Password</a>
+                    </div>                    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $("#LogIn").validate({
+        errorClass: "text-danger",
+        rules: {
+            Username: "required",
+            Password: "required"
+        },
+        messages: {
+            Username: "Please fill the Username",
+            Password: "Please fill the Password"
+        },
+        submitHandler: function (form) {
+            debugger
+            var data = $("#LogIn").serialize()
+            $.ajax({
+                url: "/LoginPage/LogIn",
+                data: data,
+                type: 'post',
+                success: function (respon) {
+                    debugger
+                    if (respon.success) {                        
+                        window.location.replace("Home")
+                    }
+                    else {
+                        alert(respon.message)
+                    }
+                }
+            })
+        }
+    })
+
+
+    $("#LupaPass").click(function () {
+        $("#body_modal").empty()
+        $("#myModalLabel").text("Send OTP")
+        $("#body_modal").load("/LoginPage/SendOTP")
+        $("#myModal").modal("show")
+    })
+</script>

@@ -279,3 +279,7 @@ E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring\bin\Debug\
 E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring\bin\Debug\net6.0\PMO_Monitoring.repo.pdb
 E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring\bin\Debug\net6.0\PMO_Monitoring.viewmodel.pdb
 E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring\bin\Debug\net6.0\AutoMapper.dll
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring\bin\Debug\net6.0\Antlr3.Runtime.dll
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring\bin\Debug\net6.0\WebGrease.dll
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring\bin\Debug\net6.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+E:\tugas vina\KERJA VINA!!!\KBI\Kerjaan\PMO_Monitoring\PMO_Monitoring\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll

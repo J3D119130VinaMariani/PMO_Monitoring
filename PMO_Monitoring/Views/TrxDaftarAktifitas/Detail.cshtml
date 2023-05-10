@@ -1,0 +1,134 @@
+﻿@using PMO_Monitoring.viewmodel
+@model VMTrxDaftarAktifitas
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-6">
+        <div class="mb-3 row">
+            <div class="col-sm-8">
+                <input type="hidden" class="form-control" id="Id" name="Id" value="@Model.Id" readonly>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Divisiid" class="col-sm-4 col-from-label">Divisi ID</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Projectname" name="Projectname" value="@Model.Divisiid" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="NamaDivisi" class="col-sm-4 col-from-label">Divisi Name</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="NamaDivisi" name="NamaDivisi" value="@Model.NamaDivisi" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Projectid" class="col-sm-4 col-from-label">Project Name</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(x=>x.Projectid,
+                new SelectList(ViewBag.DropDownProject,"Id","Projectname"),
+                "--Pilih Project--",
+                new{@class="form-control", id = "dropbox",
+                onchange = "this.form.submit();",
+                disabled = "disabled"})
+                <span asp-validation-for="Projectid" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Urutan" class="col-sm-4 col-from-label">Urutan</label>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" id="Urutan" name="Urutan" value="@Model.Urutan" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Aktifitas" class="col-sm-4 col-from-label">Aktifitas</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="Aktifitas" name="Aktifitas" readonly>@Model.Aktifitas</textarea>
+                <span asp-validation-for="Aktifitas" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Keterangan" class="col-sm-4 col-from-label">Keterangan</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="Keterangan" name="Keterangan" readonly>@Model.Keterangan</textarea>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Status" class="col-sm-4 col-from-label">Status Id</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Status" name="Status" value="@Model.Status" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="CodeStatus" class="col-sm-4 col-from-label">Status Code</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="CodeStatus" name="CodeStatus" value="@Model.CodeStatus" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="NamaStatus" class="col-sm-4 col-from-label">Keterangan Status </label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="NamaStatus" name="NamaStatus" value="@Model.NamaStatus" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Startdate" class="col-sm-4 col-from-label">Startdate</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Startdate" name="Startdate" value="@Model.Startdate.ToString("MM/dd/yyyy")" readonly></input>
+                <span asp-validation-for="Startdate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Enddate" class="col-sm-4 col-from-label">Enddate</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Enddate" name="Enddate" value="@Model.Enddate.ToString("MM/dd/yyyy")" readonly></input>
+                <span asp-validation-for="Enddate" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="mb-3 row">
+            <label for="ActualStartdate" class="col-sm-4 col-from-label">Actual Startdate</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="ActualStartdate" name="ActualStartdate" value="@Model.ActualStartdate" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="ActualEnddate" class="col-sm-4 col-from-label">Actual Enddate</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="ActualEnddate" name="ActualEnddate" value="@Model.ActualEnddate" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Progress" class="col-sm-4 col-from-label">Progress</label>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" id="Progress" name="Progress" value="@Model.Progress" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="ActualProgress" class="col-sm-4 col-from-label">Actual Progress</label>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" id="ActualProgress" name="ActualProgress" value="@Model.ActualProgress" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Approvalstatus" class="col-sm-4 col-from-label">Approval Status</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Approvalstatus" name="Approvalstatus" value="@Model.Approvalstatus" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Approvalby" class="col-sm-4 col-from-label">Approvalby</label>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" id="Approvalby" name="Approvalby" value="@Model.Approvalby" readonly></input>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Approvaldate" class="col-sm-4 col-from-label">Approvaldate</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Approvaldate" name="Approvaldate" value="@Model.Approvaldate" readonly></input>
+            </div>
+        </div>
+    </div>
+</div>

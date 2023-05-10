@@ -1,0 +1,25 @@
+﻿@using PMO_Monitoring.viewmodel
+@model VMTrxDaftarAktifitas
+@{
+    Layout = null;
+}
+<form asp-action="Komentar" method="post">
+    <div class="mb-3 row">
+        <div class="col-sm-8">
+            <input type="hidden" class="form-control" id="Id" name="Id" value="@Model.Id" readonly>
+        </div>
+        <div class="col-sm-8">
+            <div class="mb-3 row">
+                <label for="Komentar" class="col-sm-4 col-from-label">Komentar</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="Komentar" name="Komentar" value="@Model.Komentar"></input>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="float-right">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a asp-action="Index" class="btn btn-light">Back to List</a>
+    </div>
+</form>

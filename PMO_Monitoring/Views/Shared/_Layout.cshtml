@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@{
+    var username = Context.Session.GetString("Username");
+    var name = Context.Session.GetString("Name");
+}
+
+<!DOCTYPE html>
 <html lang="en" id="Layout">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +13,13 @@
 
     <script src="~/adminmart/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="~/js/jquery-datepicker/jquery.datetimepicker.css" />
+    <script src="~/js/jquery-datepicker/jquery.datetimepicker.full.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="~/js/jquery-datepicker/datepicker.css" />
+    <script src="~/js/jquery-datepicker/bootstrap-datepicker.js"></script>
+
 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="~/adminmart/assets/images/favicon.png">
@@ -19,16 +32,18 @@
     <link href="~/adminmart/dist/css/style.min.css" rel="stylesheet">
 </head>
 <body>
+    @if (username != null)
+        {
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
          data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
         <partial name="_Header" />
-
-        @Html.Partial("_Header")
-        @Html.Partial("_Sidebar")
-
+        
+            @Html.Partial("_Header")
+            @Html.Partial("_Sidebar")
+               
         <div class="page-wrapper">
-            >
+            
             <div class="container-fluid">
                 @RenderBody()
             </div>
@@ -36,10 +51,24 @@
                 All Rights Reserved by Adminmart. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
             </footer>
         </div>
-
-
     </div>
+    }
+    else
+    {
+            <div id="main-wrapper" data-theme="light">
 
+                <div class="page-wrapper">
+
+                    <div class="container-fluid">
+                        @RenderBody()
+                    </div>
+                    <footer class="footer text-center text-muted">
+                        All Rights Reserved by Adminmart. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
+                    </footer>
+                </div>
+            </div>
+       
+    }
     <!-- Modal -->
     <div id="myModal" class="modal fade" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
@@ -80,7 +109,7 @@
     <script src="~/adminmart/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="~/adminmart/dist/js/pages/dashboards/dashboard1.min.js"></script>
     <style>
-        .btn_edit, .btn_delete, .btn_detail, #btn_search, #btn_reset {
+        .btn_edit, .btn_delete, .btn_detail, #btn_search, #btn_reset, .btn_approv, .btn_reject, .btn_komentar {
             cursor: pointer
         }
     </style>

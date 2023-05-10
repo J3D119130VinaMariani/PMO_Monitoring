@@ -1,0 +1,78 @@
+﻿@using PMO_Monitoring.viewmodel
+@model VMMstUser
+
+@{
+	Layout = null;
+}
+
+<form class="md-float-material" id="verifotp">
+
+	<p style="font-size:18px;color: darkgrey;">Masukkan kode OTP yang telah dikirimkan ke email anda</p>
+
+	<div class="input-group">
+		<input type="number" id="otp-enter" name="TokenVerifikasi" class="form-control" placeholder="Masukkan OTP">
+		<input type="hidden" name="Token" id="Token" value="@Model.Token" />
+		<input type="hidden" name="Email" id="Email" value="@Model.Email" />
+		<input type="hidden" name="Id" id="Id" value="@Model.Id" />
+		<input type="hidden" name="Password" id="Password" value="@Model.Password" />
+		<span class="md-line"></span>
+		<span id="otp-validation" class="text-danger"></span>
+	</div>
+
+	<div class="row m-t-30" style="justify-content: center;">
+		<div class="col-md-5 mt-3">
+			<button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 btn-verif">Verifikasi OTP</button>
+		</div>
+		</hr>
+	</div>
+
+</form>
+<!-- end of form -->
+
+
+
+<script>
+	$(document).ready(function () {
+
+
+	$("#Token").focus(function () {
+		$("#otp-validation").hide();
+	})
+
+	$(".btn-verif").click(function () {
+		debugger
+		var otp = $("#otp-enter").val().trim()
+		var otpcek = $("#Token").val()
+		var otpbaru = $("#TokenNew").val().trim()
+		var data = $("#verifotp").serialize();
+		if (otp != "") {
+			if (otp == otpcek) {
+				$("#otp-validation").show();
+				$("#myModalLabel").text("Set Password")
+				$("#body_modal").load("LoginPage/SetPassword", data)
+				$("#myModal").modal("show")
+				return false;
+			}
+			else if (otpbaru != null && otpbaru == otp) {
+				$("#otp-validation").show();
+				$("#myModalLabel").text("Set Password")
+				$("#body_modal").load("Login/SetPassword", data)
+				$("#myModal").modal("show")
+				return false;
+			}
+			else if (otp != otpcek) {
+				$("#otp-validation").text('OTP is wrong')
+
+				return false;
+			}
+			//$("#verifotp").submit();
+		}
+		else {
+			$("#otp-validation").text(" OTP Harus Diisi")
+			$("#otp-validation").show();
+		}
+	})
+
+	 })
+</script>
+

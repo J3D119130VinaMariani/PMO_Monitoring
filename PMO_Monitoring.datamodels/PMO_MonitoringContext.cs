@@ -16,7 +16,17 @@ namespace PMO_Monitoring.datamodels
         {
         }
 
+        public virtual DbSet<MstDivisi> MstDivisis { get; set; } = null!;
+        public virtual DbSet<MstJabatan> MstJabatans { get; set; } = null!;
+        public virtual DbSet<MstMenu> MstMenus { get; set; } = null!;
+        public virtual DbSet<MstParameter> MstParameters { get; set; } = null!;
+        public virtual DbSet<MstRole> MstRoles { get; set; } = null!;
+        public virtual DbSet<MstRoleaccess> MstRoleaccesses { get; set; } = null!;
+        public virtual DbSet<MstStatus> MstStatuses { get; set; } = null!;
         public virtual DbSet<MstUser> MstUsers { get; set; } = null!;
+        public virtual DbSet<MstWorkflow> MstWorkflows { get; set; } = null!;
+        public virtual DbSet<TrxDaftaraktifita> TrxDaftaraktifitas { get; set; } = null!;
+        public virtual DbSet<TrxProject> TrxProjects { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
