@@ -150,8 +150,8 @@ namespace PMO_Monitoring.repo
             dataModel.ActualEnddate = dataView.ActualEnddate;
             dataModel.Progress = dataView.Progress;
             dataModel.Approvalstatus = null;
-            if(dataModel.ActualProgress != null)
-            {
+            if(dataView.ActualProgress != null)
+            {               
                 dataModel.ActualProgress = (decimal)dataView.ActualProgress;
             }
             dataModel.Updatedby = dataView.Updatedby;
@@ -314,6 +314,26 @@ namespace PMO_Monitoring.repo
                                               }).ToList();
             return datamodel;
         }
-
+        public string GetLegendColor(string CodeStatus)
+        {
+            var color = "";
+            if(CodeStatus == "BM")
+            {
+                color = "btn btn-secondary";
+            }
+            else if(CodeStatus == "P")
+            {
+                color = "btn btn-success";
+            }
+            else if (CodeStatus == "PD")
+            {
+                color = "btn btn-danger";
+            }
+            else if (CodeStatus == "D")
+            {
+                color = "btn btn-primary";
+            }
+            return color;
+        }
     }
 }

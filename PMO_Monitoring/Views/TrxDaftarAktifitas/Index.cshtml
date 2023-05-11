@@ -59,16 +59,20 @@
                                 {
                                     var datum = DakRep.getAllData(idDivisi, item.Projectid);
                                     var approv = DakRep.getApprov(item.Projectid);
+                                    
                                     <tr>
                                         @for (int i = 0; i < datum.Count(); i++)
                                         {
+                                            var legendColor = DakRep.GetLegendColor(datum[i].CodeStatus);
                                              <tr>
                                                  <td>@datum[i].NamaDivisi</td>
                                                  <td>@datum[i].Projectname</td>
                                                  <td>@datum[i].Urutan</td>
                                                  <td>@datum[i].Aktifitas</td>
                                                  <td>@datum[i].Keterangan</td>
-                                                 <td>@datum[i].CodeStatus</td>
+                                                 <td>
+                                                    <a class="@legendColor" style="color:white" data-id="@datum[i].Id">@datum[i].CodeStatus</a>
+                                                 </td>
                                                  <td>@datum[i].Startdate.ToString("dd/MM/yyyy")</td>
                                                  <td>@datum[i].Enddate.ToString("dd/MM/yyyy")</td>
                                                  <td>@datum[i].ActualStartdate?.ToString("dd/MM/yyyy")</td>
