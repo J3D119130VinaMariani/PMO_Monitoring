@@ -7,6 +7,36 @@
     var datProject = DakRep.getAllDataProject(idDivisi);
 }
 
+
+<style>
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        width: -webkit-fill-available;
+    }
+
+    .button2 {
+        background-color: #008CBA;
+    }
+    /* Blue */
+    .button3 {
+        background-color: #f44336;
+    }
+    /* Red */
+    /* Gray */
+    .button4 {
+        background-color: #555555;
+    }
+    /* Black */
+</style>
+
 <form asp-action="Index" method="get" id="form_search">
     <div class="row">
         <div class="col-12">
@@ -41,7 +71,7 @@
                     <th> Urutan </th>
                     <th> Aktifitas </th>
                     <th> Keterangan </th>
-                    <th> Status </th>
+                    <th><center>Status</center></th>
                     <th> Startdate </th>
                     <th> Enddate </th>
                     <th> Actual Startdate </th>

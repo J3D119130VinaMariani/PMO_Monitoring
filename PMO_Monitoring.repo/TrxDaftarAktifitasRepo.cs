@@ -150,10 +150,16 @@ namespace PMO_Monitoring.repo
             dataModel.ActualEnddate = dataView.ActualEnddate;
             dataModel.Progress = dataView.Progress;
             dataModel.Approvalstatus = null;
-            if(dataView.ActualProgress != null)
-            {               
+
+            if(dataView.Status == 3)
+            {
+                dataModel.ActualProgress = dataView.Progress;
+            }
+            else if(dataView.ActualProgress != null)
+            {
                 dataModel.ActualProgress = (decimal)dataView.ActualProgress;
             }
+
             dataModel.Updatedby = dataView.Updatedby;
             dataModel.Updateddate = DateTime.Now;
             try
@@ -281,7 +287,7 @@ namespace PMO_Monitoring.repo
         public bool CheckProgress(decimal progress, int id)
         {
             TrxDaftaraktifita datum = db.TrxDaftaraktifitas.Find(id);
-            if (progress > datum.Progress)
+            if (progress > datum.Progress || datum.Progress == null)
             {
                 return true;
             }
@@ -319,19 +325,23 @@ namespace PMO_Monitoring.repo
             var color = "";
             if(CodeStatus == "BM")
             {
-                color = "btn btn-secondary";
+                //color = "btn btn-secondary";
+                color = "button button4";
             }
             else if(CodeStatus == "P")
             {
-                color = "btn btn-success";
+                color="button";
+                //color = "btn btn-success";
             }
             else if (CodeStatus == "PD")
             {
-                color = "btn btn-danger";
+                color = "button button3";
+                //color = "btn btn-danger";
             }
             else if (CodeStatus == "D")
             {
-                color = "btn btn-primary";
+                color = "button button2";
+                //color = "btn btn-primary";
             }
             return color;
         }
