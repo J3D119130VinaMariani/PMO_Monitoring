@@ -69,5 +69,6 @@ namespace PMO_Monitoring.viewmodel
         public string? Projectname { get; set; }
         public double lamaProgress { get; set; }
         public double lamaActualProgres { get; set; }
+        public string? StrActuallProgress { get; set; }
     }
 }

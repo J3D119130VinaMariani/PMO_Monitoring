@@ -4,6 +4,7 @@ using PMO_Monitoring.viewmodel;
 using PMO_viewmodel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -98,7 +99,8 @@ namespace PMO_Monitoring.repo
                                                  Updatedby = da.Updatedby,
                                                  Updateddate = da.Updateddate,
                                                  Approvalstatus = da.Approvalstatus,
-                                                 Komentar = da.Komentar
+                                                 Komentar = da.Komentar,
+                                                 StrActuallProgress = da.ActualProgress.ToString()
                                              }).FirstOrDefault();
             return dataView;
         }
@@ -137,6 +139,8 @@ namespace PMO_Monitoring.repo
         }
         public VMResponse Edit(VMTrxDaftarAktifitas dataView)
         {
+           
+
             TrxDaftaraktifita dataModel = db.TrxDaftaraktifitas.Find(dataView.Id);
             dataModel.Divisiid = (int)dataView.Divisiid;
             dataModel.Projectid = dataView.Projectid;
@@ -155,24 +159,41 @@ namespace PMO_Monitoring.repo
             {
                 dataModel.ActualProgress = dataView.Progress;
             }
-            else if(dataView.ActualProgress != null)
+            else if(dataView.StrActuallProgress != null)
             {
-                dataModel.ActualProgress = (decimal)dataView.ActualProgress;
+                //dataView.ActualProgress = decimal.Parse(dataView.StrActuallProgress.Replace(".", ","));
+               dataView.ActualProgress = decimal.Parse(dataView.StrActuallProgress.Replace(",", "."));
+                dataModel.ActualProgress = dataView.ActualProgress;
             }
 
             dataModel.Updatedby = dataView.Updatedby;
             dataModel.Updateddate = DateTime.Now;
             try
             {
-                db.Update(dataModel);
-                db.SaveChanges();
-                response.Message = "data success saved";
-                response.Entity = dataModel;
+                if(dataModel.ActualProgress <= dataModel.Progress && decimal.Parse(dataView.StrActuallProgress.Replace(",", ".")) <= dataModel.Progress)
+                {
+                    db.Update(dataModel);
+                    db.SaveChanges();
+                    response.Message = "data success saved";
+                    response.Entity = dataModel;
+                }
+                else
+                {
+                    throw new Exception();
+                }
             }
             catch (Exception e)
             {
-                response.Success = false;
-                response.Message = "failed saved : " + e.Message;
+                if (decimal.Parse(dataView.StrActuallProgress.Replace(",", ".")) > dataModel.Progress)
+                {
+                    response.Message = "failed saved : Actual Progress Melebih Batas Maksimum ";
+                }
+                else
+                {
+                    response.Message = "failed saved : " + e.Message;
+                }
+                    response.Success = false;
+              
                 response.Entity = GetMapper().Map<TrxDaftaraktifita>(dataModel);
             }
             return response;
@@ -344,6 +365,15 @@ namespace PMO_Monitoring.repo
                 //color = "btn btn-primary";
             }
             return color;
+        }
+        public bool GetInfo(int id)
+        {
+            TrxDaftaraktifita datum = db.TrxDaftaraktifitas.Find(id);
+            if(datum.ActualProgress > datum.Progress && datum.ActualProgress != null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

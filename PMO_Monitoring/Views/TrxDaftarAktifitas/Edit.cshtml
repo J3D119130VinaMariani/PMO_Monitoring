@@ -98,10 +98,10 @@
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="ActualProgress" class="col-sm-4 col-from-label">Actual Progress</label>
+                <label for="StrActuallProgress" class="col-sm-4 col-from-label">Actual Progress</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="ActualProgress" name="ActualProgress" value="@Model.ActualProgress"></input>
-                    <span asp-validation-for="ActualProgress" id="validate_ActualProgress" class="text-danger"></span>
+                    <input type="text" class="form-control" id="StrActuallProgress" name="StrActuallProgress" value="@Model.StrActuallProgress"></input>
+                    <span asp-validation-for="StrActuallProgress" id="validate_StrActuallProgress" class="text-danger"></span>
                 </div>
             </div>
         </div>
@@ -211,6 +211,10 @@
                                 alert(respon.message)
                                 window.location.reload()
                             }
+                            else
+                            {
+                                alert(respon.message)
+                            }
                         }
                     })
                 }
@@ -219,7 +223,7 @@
                 }
             }
         })
-        $("#ActualProgress").change(function () {
+        $("#StrActuallProgress").change(function () {
             debugger
             var progress = $(this).val()
             var id = $("#Id").val()
@@ -230,11 +234,11 @@
                 success: function (respon) {
                     debugger
                     if (respon) {
-                        $("#validate_ActualProgress").text("Melebihi Maksimum Progress")
+                        $("#validate_StrActuallProgress").text("Melebihi Maksimum Progress")
                         isvalid = false
                     }
                     else {
-                        $("#validate_ActualProgress").empty()
+                        $("#validate_StrActuallProgress").empty()
                         isvalid = true
                     }
                 }

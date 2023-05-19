@@ -35,6 +35,7 @@
         background-color: #555555;
     }
     /* Black */
+
 </style>
 
 <form asp-action="Index" method="get" id="form_search">
@@ -90,36 +91,44 @@
                                     var datum = DakRep.getAllData(idDivisi, item.Projectid);
                                     var approv = DakRep.getApprov(item.Projectid);
                                     
-                                    <tr>
-                                        @for (int i = 0; i < datum.Count(); i++)
+                                        <tr>
+                                            @for (int i = 0; i < datum.Count(); i++)
                                         {
                                             var legendColor = DakRep.GetLegendColor(datum[i].CodeStatus);
-                                             <tr>
-                                                 <td>@datum[i].NamaDivisi</td>
-                                                 <td>@datum[i].Projectname</td>
-                                                 <td>@datum[i].Urutan</td>
-                                                 <td>@datum[i].Aktifitas</td>
-                                                 <td>@datum[i].Keterangan</td>
-                                                 <td>
-                                                    <a class="@legendColor" style="color:white" data-id="@datum[i].Id">@datum[i].CodeStatus</a>
-                                                 </td>
-                                                 <td>@datum[i].Startdate.ToString("dd/MM/yyyy")</td>
-                                                 <td>@datum[i].Enddate.ToString("dd/MM/yyyy")</td>
-                                                 <td>@datum[i].ActualStartdate?.ToString("dd/MM/yyyy")</td>
-                                                 <td>@datum[i].ActualEnddate?.ToString("dd/MM/yyyy")</td>
-                                                 <td>@datum[i].Progress</td>
-                                                 <td>@datum[i].ActualProgress</td>
-                                                 
-                                                 @if (approv.Count() == 1 && approv[0].Approvalstatus != null)
+                                            var info = DakRep.GetInfo(datum[i].Id);
+                                                <tr>
+                                                     <td>@datum[i].NamaDivisi</td>
+                                                     <td>@datum[i].Projectname</td>
+                                                     <td>@datum[i].Urutan</td>
+                                                     <td>@datum[i].Aktifitas</td>
+                                                     <td>@datum[i].Keterangan</td>
+                                                     <td>
+                                                        <a class="@legendColor" style="color:white" data-id="@datum[i].Id">@datum[i].CodeStatus</a>                                                    
+                                                     </td>
+                                                     <td>@datum[i].Startdate.ToString("dd/MM/yyyy")</td>
+                                                     <td>@datum[i].Enddate.ToString("dd/MM/yyyy")</td>
+                                                     <td>@datum[i].ActualStartdate?.ToString("dd/MM/yyyy")</td>
+                                                     <td>@datum[i].ActualEnddate?.ToString("dd/MM/yyyy")</td>
+                                                     <td>
+                                                        <center>@datum[i].Progress</center>
+                                                     </td>
+                                                     <td>
+                                                        <a>@datum[i].ActualProgress</a>
+                                                        @if (info == false)
+                                                        {
+                                                        <a class="fas fa-exclamation-triangle" style="color: orange"></a>
+                                                        }                                                                                                     
+                                                     </td>
+                                                     
+                                                     @if (approv.Count() == 1 && approv[0].Approvalstatus != null)
                                                  {
-                                                    <td><center>@datum[i].Approvalstatus</center></td>
+                                                        <td><center>@datum[i].Approvalstatus</center></td>
                                                  }
                                                 else
                                                 {
-                                                    @if (idrole == 4)
-                                                    {
-                                                       
-                                                        @if ( i == 0)
+                                                        @if (idrole == 4)
+                                                    {                                                       
+                                                            @if ( i == 0)
                                                         {
                                                             //@if (approv.Count() == 1 && approv[0].Approvalstatus != null)
                                                             //{
@@ -128,41 +137,41 @@
                                                             //else
                                                             //{ 
                                                             // 
-                                                            <td rowspan="@datum.Count()">
-                                                                  <center><a class="btn btn-primary btn_approv " style="color:white" data-id="@datum[i].Projectid">Approv</a></center>
-                                                                  <center><a class="btn btn-primary btn_reject " style="color:white" data-id="@datum[i].Projectid">Reject</a></center>
-                                                             </td>
+                                                                <td rowspan="@datum.Count()">
+                                                                      <center><a class="btn btn-primary btn_approv " style="color:white" data-id="@datum[i].Projectid">Approv</a></center>
+                                                                      <center><a class="btn btn-primary btn_reject " style="color:white" data-id="@datum[i].Projectid">Reject</a></center>
+                                                                 </td>
                                                         } 
                                                     }
                                                     else
                                                     {
-                                                        <td><center>@datum[i].Approvalstatus</center></td>
+                                                            <td><center>@datum[i].Approvalstatus</center></td>
                                                     }
                                                 }
-                                                <td>@datum[i].Komentar</td>
-                                                <td>
-                                                    @{
+                                                    <td>@datum[i].Komentar</td>
+                                                    <td>
+                                                        @{
                                                         if (idrole == 4)
                                                         {
-                                                               <a class="btn btn-primary btn_detail " style="color:white" data-id="@datum[i].Id">Detail</a>                                                      
+                                                                       <a class="btn btn-primary btn_detail " style="color:white" data-id="@datum[i].Id">Detail</a>                                                      
                                                             if (datum[i].Komentar == null)
                                                             {
-                                                               <a class="btn btn-primary btn_komentar " style="color:white" data-id="@datum[i].Id">Komentar</a>
+                                                                       <a class="btn btn-primary btn_komentar " style="color:white" data-id="@datum[i].Id">Komentar</a>
                                                             }
                                                         }
                                                         else
                                                         {
-                                                               <a class="btn btn-primary btn_edit" style="color:white" data-id="@datum[i].Id">Edit</a>
-                                                               <a class="btn btn-primary btn_delete" style="color:white" data-id="@datum[i].Id">Delete</a>
-                                                               <a class="btn btn-primary btn_detail " style="color:white" data-id="@datum[i].Id">Detail</a>
+                                                                       <a class="btn btn-primary btn_edit" style="color:white" data-id="@datum[i].Id">Edit</a>
+                                                                       <a class="btn btn-primary btn_delete" style="color:white" data-id="@datum[i].Id">Delete</a>
+                                                                       <a class="btn btn-primary btn_detail " style="color:white" data-id="@datum[i].Id">Detail</a>
 
                                                         }
-                                                    }
-                                                </td>
+                                                        }
+                                                    </td>
 
-                                             </tr>
+                                                 </tr>
                                         }
-                                    </tr>
+                                        </tr>
                                 }
 
                             }
